@@ -56,4 +56,14 @@ jobs:
           curl -x socks5://127.0.0.1:40000 https://1.1.1.1/cdn-cgi/trace | grep warp || echo "WARP Test Failed, but continuing..."
 
       - name: Run Polling Script
+        env:
+          DATES: ${{ vars.DATES || '20260717,20260718,20260719' }}
+          REGION_CODE: ${{ vars.REGION_CODE || 'CHEN' }}
+          LATITUDE: ${{ vars.LATITUDE || '13.0827' }}
+          VENUE_CODE: ${{ vars.VENUE_CODE || 'SATS' }}
+          VENUE_NAME: ${{ vars.VENUE_NAME || 'Chennai IMAX' }}
+          EVENT_CODE: ${{ vars.EVENT_CODE || 'ET00452034' }}
+          SCREEN_FILTER: ${{ vars.SCREEN_FILTER || 'IMAX' }}
+          MOVIE_TAG: ${{ vars.MOVIE_TAG || '#TheOdyssey' }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC || 'odssy_stlyt' }}
         run: python -u run_scraper.py
